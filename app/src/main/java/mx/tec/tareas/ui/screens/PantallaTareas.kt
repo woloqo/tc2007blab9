@@ -26,13 +26,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import mx.tec.tareas.domain.Tarea
 import mx.tec.tareas.ui.components.TarjetaTarea
+import mx.tec.tareas.ui.state.AppViewModelProvider
 import mx.tec.tareas.ui.state.TareasViewModel
 import mx.tec.tareas.ui.theme.TareasTema
 import mx.tec.tareas.ui.theme.TareasTheme
 
-/** Con estado: crea su ViewModel. */
+/** Con estado: el ViewModel lo arma la fábrica, con las piezas del contenedor. */
 @Composable
-fun PantallaTareas(vm: TareasViewModel = viewModel()) {
+fun PantallaTareas(vm: TareasViewModel = viewModel(factory = AppViewModelProvider.Factory)) {
     ListaTareas(
         tareas = vm.tareas,
         cargando = vm.cargando,

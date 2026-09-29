@@ -9,10 +9,9 @@ import kotlinx.coroutines.launch
 import mx.tec.tareas.data.TareasRepository
 import mx.tec.tareas.domain.Tarea
 
-class TareasViewModel : ViewModel() {
-
-    // El ViewModel construye todo lo que necesita
-    private val repo = TareasRepository()
+class TareasViewModel(
+    private val repo: TareasRepository
+) : ViewModel() {
 
     var tareas by mutableStateOf<List<Tarea>>(emptyList())
         private set
