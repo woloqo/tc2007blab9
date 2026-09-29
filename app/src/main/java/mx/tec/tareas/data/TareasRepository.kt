@@ -1,6 +1,7 @@
 package mx.tec.tareas.data
 
 import mx.tec.tareas.domain.Tarea
+import javax.inject.Inject
 
 /** El enchufe: quien lo usa no sabe de dónde vienen las tareas. */
 interface TareasRepository {
@@ -8,13 +9,13 @@ interface TareasRepository {
 }
 
 /** CFE: la fuente de verdad, que le pregunta a la API. */
-class TareasRepositoryReal(
+class TareasRepositoryReal @Inject constructor(
     private val api: ApiRemota
 ) : TareasRepository {
     override suspend fun obtenerTareas() = api.descargarTareas()
 }
 
 /** La planta de emergencia: una tarea fija, al instante y sin red. */
-class TareasRepositoryFalso : TareasRepository {
+class TareasRepositoryFalso @Inject constructor() : TareasRepository {
     override suspend fun obtenerTareas() = listOf(Tarea("Tarea de prueba", "Pruebas", "Nunca"))
 }
